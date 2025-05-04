@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>My Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #0f0f1a;
+    color: #eee;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at center, #444 1px, transparent 1px),
+                radial-gradient(ellipse at center, #666 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
+    z-index: -1;
+    animation: starTwinkle 20s linear infinite;
+    opacity: 0.15;
+  }
+
+  @keyframes starTwinkle {
+    0%, 100% {opacity: 0.15;}
+    50% {opacity: 0.3;}
+  }
+
+  header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1rem;
+    background: linear-gradient(135deg, #2a2a72 0%, #009ffd 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: "";
+    position: absolute;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: blur(90px);
+    animation: pulseGlow 4s ease-in-out infinite;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {opacity: 0.15;}
+    50% {opacity: 0.35;}
+  }
+
+  header h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #f0f8ff;
+    text-shadow: 0 0 10px rgba(0,255,255,0.8);
+    animation: slideInDown 1s ease forwards;
+  }
+
+  header p {
+    font-size: 1.2rem;
+    margin: 1rem 0 2rem;
+    color: #dcefffcc;
+    max-width: 320px;
+    animation: fadeInUp 1.4s ease forwards;
+  }
+
+  header .cta-btn {
+    padding: 0.7rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #0f0f1a;
+    background: #00ffff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 0 15px #00ffffaa;
+    transition: all 0.3s ease;
+    animation: fadeInUp 1.6s ease forwards;
+    text-transform: uppercase;
+  }
+  header .cta-btn:hover {
+    background: #00d8d8;
+    box-shadow: 0 0 25px #00d8d8cc;
+    transform: scale(1.05);
+  }
+
+  @keyframes slideInDown {
+    from {
+      transform: translateY(-50px);
+      opacity: 0;
+    } to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    } to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  main {
+    max-width: 1000px;
+    margin: 2rem auto 4rem;
+    padding: 0 1rem;
+    flex-grow: 1;
+  }
+
+  section {
+    margin-bottom: 4rem;
+  }
+
+  h2.section-title {
+    font-weight: 600;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #00ffff;
+    position: relative;
+  }
+
+  h2.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #00ffff;
+    margin: 0.5rem auto 0;
+    border-radius: 3px;
+  }
+
+
+  .fade-in-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  .fade-in-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #about p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #bccddd;
+    line-height: 1.8;
+    text-align: center;
+  }
+
+  
+  #projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2rem;
+  }
+  .project-card {
+    background: #121223;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 0 10px #00ffff22;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px #00ffffaa;
+  }
+
+  .project-card h3 {
+    margin-bottom: 0.7rem;
+    color: #00ffff;
+    font-size: 1.3rem;
+  }
+
+  .project-card p {
+    color: #ccc;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+
+  #skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .skill {
+    background: #121223;
+    padding: 1rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #00ffff;
+    box-shadow: 0 0 15px #00ffff55;
+    position: relative;
+    width: 110px;
+    text-align: center;
+    user-select: none;
+    transition: box-shadow 0.4s ease;
+  }
+  .skill:hover {
+    box-shadow: 0 0 30px #00ffffdd;
+  }
+
+  
+  #contact form {
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  #contact label {
+    color: #ccc;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  #contact input, #contact textarea {
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    border: none;
+    background: #222233;
+    color: #eee;
+    font-size: 1rem;
+    resize: none;
+  }
+  #contact input:focus, #contact textarea:focus {
+    outline: 2px solid #00ffff;
+    background: #1a1a2b;
+  }
+  #contact button {
+    margin-top: 0.5rem;
+    background: #00ffff;
+    color: #0f0f1a;
+    font-weight: 600;
+    padding: 0.7rem 0;
+    border-radius: 30px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 15px #00ffffaa;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+  #contact button:hover {
+    background: #00d8d8;
+    box-shadow: 0 0 30px #00d8d8ee;
+    transform: scale(1.05);
+  }
+
+  
+  footer {
+    text-align: center;
+    padding: 1rem 1rem 2rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  @media (max-width: 400px) {
+    header h1 {
+      font-size: 2.2rem;
+    }
+    header p {
+      font-size: 1rem;
+      max-width: 280px;
+    }
+    main {
+      margin: 2rem 0 3rem;
+      padding: 0 0.5rem;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1 class="slide-in">krish zode</h1>
+  <p class="slide-in-delay">Creative Web Developer & software developer</p>
+  <button class="cta-btn scroll-to-projects" aria-label="View my projects">View Projects</button>
+</header>
+
+<main role="main">
+  <section id="about" class="fade-in-on-scroll" tabindex="0" aria-label="About me">
+    <h2 class="section-title">About Me</h2>
+    <p>Hello! I'm krish, a passionate web developer specializing in creating beautiful, fast, and interactive websites and apps. My goal is to bring your ideas to life with clean, modern designs and smooth user experiences.</p>
+  </section>
+
+  <section id="projects" aria-label="My projects">
+    <h2 class="section-title fade-in-on-scroll">Projects</h2>
+    <div class="project-card fade-in-on-scroll" tabindex="0" role="article" aria-label="Project 1: Portfolio Website">
+      <h3>Portfolio Website</h3>
+      <p>Modern responsive portfolio with animations and interactive UI. Built with HTML, CSS, and vanilla JavaScript.</p>
+    </div>
+    <div class="project-card fade-in-on-scroll" tabindex="0" role="article" aria-label="Project 2: Task Manager App">
+      <h3>netflix clone </h3>
+      <p>A sleek task management tool with drag-and-drop and localStorage support to organize your workflow.</p>
+    </div>
+    <div class="project-card fade-in-on-scroll" tabindex="0" role="article" aria-label="Project 3: Weather Dashboard">
+      <h3>Weather Dashboard</h3>
+      <p>Live weather forecasts with animated backgrounds based on conditions, using OpenWeatherMap API.</p>
+    </div>
+  </section>
+
+  <section id="skills" aria-label="My skills" class="fade-in-on-scroll">
+    <h2 class="section-title">Skills</h2>
+    <div class="skill" aria-label="HTML5">HTML</div>
+    <div class="skill" aria-label="CSS3">CSS</div>
+    <div class="skill" aria-label="JavaScript">JavaScript</div>
+    <div class="skill" aria-label="React">React</div>
+   
+  </section>
+
+  <section id="contact" class="fade-in-on-scroll" aria-labelledby="contact-title">
+    <h2 class="section-title" id="contact-title">Get In Touch</h2>
+    <form id="contact-form" aria-describedby="contact-instructions" novalidate>
+      <p id="contact-instructions" style="text-align:center; color:#aaa; font-size:0.9rem; margin-bottom:0.7rem;">
+        Feel free to reach out for collaborations or just a friendly chat!
+      </p>
+      <label for="name">name</label>
+      <input type="text" id="name" name="name" required aria-required="true" placeholder="Your full name" autocomplete="name" />
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required aria-required="true" placeholder="you@example.com" autocomplete="email" />
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="4" required aria-required="true" placeholder="Write your message here"></textarea>
+      <button type="submit" aria-label="Send message">Send Message</button>
+      <p id="form-status" role="alert" aria-live="polite" style="margin-top:0.7rem;"></p>
+    </form>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 krish. All rights reserved.
+</footer>
+
+<script>
+  
+  document.querySelector('.scroll-to-projects').addEventListener('click', () => {
+    document.getElementById('projects').scrollIntoView({behavior: 'smooth'});
+  });
+
+ 
+  const faders = document.querySelectorAll('.fade-in-on-scroll');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  faders.forEach(fader => observer.observe(fader));
+
+  
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('header h1, header p').forEach(el => {
+      el.classList.add('slide-in');
+    });
+  });
+
+
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const status = document.getElementById('form-status');
+    
+    const name = this.name.value.trim();
+    const email = this.email.value.trim();
+    const message = this.message.value.trim();
+    if (!name || !email || !message) {
+      status.textContent = 'Please fill in all fields.';
+      status.style.color = 'tomato';
+      return;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      status.textContent = 'Please enter a valid email address.';
+      status.style.color = 'tomato';
+      return;
+    }
+ 
+    status.textContent = 'Sending...';
+    status.style.color = '#00ffff';
+
+    setTimeout(() => {
+      status.textContent = 'Thank you for your message! I will get back to you soon.';
+      this.reset();
+    }, 1500);
+  });
+</script>
+
+</body>
+</html>
